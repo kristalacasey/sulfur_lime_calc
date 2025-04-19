@@ -54,3 +54,56 @@ inches_to_feet <- function(inches) {
     return(inches / 12)
 }
 
+
+#' Estimate Sulfur Needed for pH Adjustment in Peat/Perlite Mix
+#'
+#' Estimates the amount of elemental sulfur needed to lower the pH of an
+#' 80% peat / 20% perlite mix.
+#'
+#' @param starting_ph Numeric. The initial pH of the soil mix.
+#' @param target_ph Numeric. The desired target pH (must be lower than starting_ph).
+#' @param volume_L Numeric. The total volume of the soil mix in liters.
+#'
+#' @return A list containing the estimated grams of elemental sulfur needed
+#'         and important notes regarding the estimation.
+#' @export
+#'
+#' @examples
+#' estimate_sulfur_for_ph(starting_ph = 7.0, target_ph = 6.2, volume_L = 76.16)
+#'
+#' @warning This function provides an ESTIMATE only. The actual buffering
+#'   capacity of peat moss varies significantly. It is highly recommended to
+#'   base applications on soil buffer tests or perform small-scale trials
+#'   and incremental adjustments. Assumes elemental sulfur.
+#'
+estimate_sulfur_for_ph <- function(starting_ph, target_ph, volume_L) {
+
+  # --- Estimated Constant for 80/20 Peat/Perlite ---
+  # Grams of elemental sulfur per liter of mix estimated to lower pH by 1 unit.
+  # Based on 5 grams per 10 liters per 1.0 pH unit change.
+  SULFUR_GRAMS_PER_LITER_PER_PH_UNIT <- 0.5 # 5g / 10L = 0.5 g/L
+
+  # --- Input Validation ---
+  if (!is.numeric(starting_ph) || starting_ph <= 1 || starting_ph > 10) {
+    stop("Starting pH must be a valid number, typically between 1 and 10.")
+  }
+  if (!is.numeric(target_ph) || target_ph <= 1 || target_ph > 10) {
+    stop("Target pH must be a valid number, typically between 1 and 10.")
+  }
+   if (target_ph >= starting_ph) {
+    stop("Target pH must be lower than starting pH to add sulfur.")
+  }
+  if (!is.numeric(volume_L) || volume_L <= 0) {
+    stop("Volume (L) must be a positive number.")
+  }
+
+  # --- Calculations ---
+  ph_change_needed <- starting_ph - target_ph
+
+  estimated_sulfur_grams <- ph_change_needed * SULFUR_GRAMS_PER_LITER_PER_PH_UNIT * volume_L
+
+  # --- Return Result ---
+  return(list(
+    estimated_sulfur_grams = estimated_sulfur_grams
+  ))
+}
