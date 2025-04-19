@@ -29,7 +29,7 @@ lime_scenarios <- list(
   "Lime_Med_60_Percent" = list(starting_ph = 5.58, description = "Medium Mix, 60% Hemp waste (Lime)"),
   "Lime_Small_20_Percent" = list(starting_ph = 4.86, description = "Small Mix, 20% Hemp waste (Lime)"),
   "Lime_Small_40_Percent" = list(starting_ph = 5.24, description = "Small Mix, 40% Hemp waste (Lime)"),
-  "Lime_Small_60_Percent" = list(starting_ph = 6.00, description = "Small Mix, 60% Hemp waste (Lime)") # Assuming 6 is 6.00
+  "Lime_Small_60_Percent" = list(starting_ph = 6.00, description = "Small Mix, 60% Hemp waste (Lime)")
 )
 
 
