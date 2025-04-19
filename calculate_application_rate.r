@@ -90,7 +90,7 @@ estimate_sulfur_for_ph <- function(starting_ph, target_ph, volume_L) {
   if (!is.numeric(target_ph) || target_ph <= 1 || target_ph > 10) {
     stop("Target pH must be a valid number, typically between 1 and 10.")
   }
-   if (target_ph >= starting_ph) {
+  if (target_ph >= starting_ph) {
     stop("Target pH must be lower than starting pH to add sulfur.")
   }
   if (!is.numeric(volume_L) || volume_L <= 0) {
